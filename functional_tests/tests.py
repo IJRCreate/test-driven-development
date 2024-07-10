@@ -67,20 +67,20 @@ class NewVisitorTest(LiveServerTestCase):
     def test_multiple_users_can_start_lists_at_different_urls(self):
         # Edith starts a new to-do list
         self.browser.get(self.live_server_url)
-        inputbox = self.browser.find_element(By.ID, 'id_new_item')
-        inputbox.send_keys('Buy peacock feathers')
+        inputbox = self.browser.find_element(By.ID, "id_new_item")
+        inputbox.send_keys("Buy peacock feathers")
         inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy peacock feathers')
+        self.wait_for_row_in_list_table("1: Buy peacock feathers")
 
         # She notices that her list has a unique URL
         edith_list_url = self.browser.current_url
-        self.assertRegex(edith_list_url, '/lists/.+')
+        self.assertRegex(edith_list_url, "/lists/.+")
 
         # Now a new user, Francis, comes along to the site.
 
         ## We delete all the browser's cookies
         ## as a way of simulating a brand new user session
-        
+
         self.browser.delete_all_cookies()
 
         # Francis visits the home page.  There is no sign of Edith's
