@@ -1,6 +1,7 @@
 from django.test import TestCase
 from lists.models import Item
 
+
 # Create your tests here.
 class HomePageTest(TestCase):
     def test_uses_home_template(self):
@@ -15,17 +16,13 @@ class HomePageTest(TestCase):
         self.assertContains(response, "itemey 2")
 
     def test_can_save_a_POST_request(self):
-        self.client.post("/",
-                                    data = {"item_text": "A new list item"}
-                                    )
+        self.client.post("/", data={"item_text": "A new list item"})
         self.assertEqual(Item.objects.count(), 1)
         new_item = Item.objects.first()
         self.assertEqual(new_item.text, "A new list item")
 
     def test_redirects_after_POST(self):
-        response = self.client.post("/",
-                                    data = {"item_text": "A new list item"}
-                                    )      
+        response = self.client.post("/", data={"item_text": "A new list item"})
         self.assertRedirects(response, "/")
 
     def test_only_saves_items_when_necessary(self):
