@@ -157,3 +157,4 @@ cython_debug/
 # YAML Configs
 *.yaml
 /static
+src/db.sqlite3
