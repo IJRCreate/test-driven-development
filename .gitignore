@@ -156,6 +156,9 @@ cython_debug/
 
 # YAML Configs
 *.yaml
+!/infra/deploy-playbook.yaml
+
+# Static
 /static
 src/db.sqlite3
 src/static
