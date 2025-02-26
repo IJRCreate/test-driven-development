@@ -43,3 +43,7 @@ class ListAndItemModelsTest(TestCase):
         item = Item(list=mylist, text="")
         with self.assertRaises(ValidationError):
             item.full_clean()  # Django models don’t run full validation on save.
+    
+    def test_get_absolute_url(self):
+        mylist = List.objects.create()
+        self.assertEqual(mylist.get_absolute_url(), f"/lists/{mylist.id}/")
