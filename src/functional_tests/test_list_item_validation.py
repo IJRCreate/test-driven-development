@@ -12,13 +12,13 @@ class ItemValidationTest(FunctionalTest):
 
         # The browser intercepts the request, and does not load the list page
         self.wait_for(
-            lambda: self.browser.find_element(By.CSS_SELECTOR, "#id_text:invalid")  
+            lambda: self.browser.find_element(By.CSS_SELECTOR, "#id_text:invalid")
         )
 
         # She starts typing some text for the new item and the error disappears
         self.get_item_input_box().send_keys("Purchase milk")
         self.wait_for(
-            lambda: self.browser.find_element(By.CSS_SELECTOR, "#id_text:valid")  
+            lambda: self.browser.find_element(By.CSS_SELECTOR, "#id_text:valid")
         )
 
         # And she can submit it successfully

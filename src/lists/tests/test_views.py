@@ -3,6 +3,7 @@ from django.utils.html import escape
 from lists.models import Item, List
 from lists.forms import ItemForm, EMPTY_ITEM_ERROR
 
+
 # Create your tests here.
 class HomePageTest(TestCase):
     def test_uses_home_template(self):
@@ -10,8 +11,8 @@ class HomePageTest(TestCase):
         self.assertTemplateUsed(response, "home.html")
 
     def test_home_page_uses_item_form(self):
-            response = self.client.get("/")
-            self.assertIsInstance(response.context["form"], ItemForm)
+        response = self.client.get("/")
+        self.assertIsInstance(response.context["form"], ItemForm)
 
 
 class ListViewTest(TestCase):

@@ -19,9 +19,10 @@ def view_list(request, list_id):
         form = ItemForm()
     return render(request, "list.html", {"list": our_list, "form": form})
 
+
 def new_list(request):
     form = ItemForm(data=request.POST)
-    if form.is_valid():  
+    if form.is_valid():
         nulist = List.objects.create()
         Item.objects.create(text=request.POST["text"], list=nulist)
         return redirect(nulist)
