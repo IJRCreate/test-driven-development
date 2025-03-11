@@ -25,13 +25,13 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        ls
-        ls $GITHUB_WORKSPACE
     - name: Run Unit Tests
+      working-directory: src
       run: |
         python manage.py test lists
     - name: Run Functional Tests
+      working-directory: src
       run: |
         pip install selenium
-        cd src && python manage.py test functional_tests
+        python manage.py test functional_tests
         
