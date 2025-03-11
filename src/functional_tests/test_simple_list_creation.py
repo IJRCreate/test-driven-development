@@ -10,8 +10,6 @@ class NewVisitorTest(FunctionalTest):
         # She goes to check out its homepage
         self.browser.get(self.live_server_url)
 
-        self.fail()
-
         # She notices the page title and header mention to-do lists
         self.assertIn("To-Do", self.browser.title)
         header_text = self.browser.find_element(By.TAG_NAME, "h1").text
