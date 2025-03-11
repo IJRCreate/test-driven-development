@@ -162,3 +162,6 @@ cython_debug/
 /static
 src/db.sqlite3
 src/static
+
+# Testing
+src/functional_tests/screendumps
