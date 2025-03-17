@@ -44,7 +44,7 @@ jobs:
         name: screendumps
         path: src/functional_tests/screendumps/
   
-  test-staging:
+  deploy-staging:
     needs: testing
     runs-on: ubuntu-latest
     strategy:
@@ -62,7 +62,6 @@ jobs:
        ssh-keyscan -t rsa,dsa,ecdsa,ed25519 ${{secrets.STAGING_HOST}} >> /home/runner/.ssh/known_hosts
     - name: Run ansible script
       run: |
-        systemctl disable ssh.socket
         systemctl start ssh.service
         ansible-playbook -vvv --private-key /home/runner/.ssh/id_rsa --user=${{secrets.ANSIBLE_USER}} -i ${{secrets.STAGING_HOST}}, infra/deploy-playbook.yaml
    
