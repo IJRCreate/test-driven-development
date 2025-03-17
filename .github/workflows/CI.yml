@@ -62,6 +62,6 @@ jobs:
        ssh-keyscan -t rsa,dsa,ecdsa,ed25519 ${{secrets.STAGING_HOST}} >> /home/runner/.ssh/known_hosts
     - name: Run ansible script
       run: |
-        systemctl start ssh.service
+        sudo systemctl start ssh.service
         ansible-playbook -vvv --private-key /home/runner/.ssh/id_rsa --user=${{secrets.ANSIBLE_USER}} -i ${{secrets.STAGING_HOST}}, infra/deploy-playbook.yaml
    
