@@ -54,7 +54,7 @@ jobs:
     steps: 
     - name: Setup SSH 
       run: |
-       ssh-agent -s
+       eval `ssh-agent -s`
        mkdir -p /home/runner/.ssh/
        touch /home/runner/.ssh/id_ed25519
        echo -e "${{secrets.SSH_KEY}}" > /home/runner/.ssh/id_ed25519
