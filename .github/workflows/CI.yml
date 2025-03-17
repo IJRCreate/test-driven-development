@@ -54,7 +54,7 @@ jobs:
     steps: 
     - name: Setup SSH 
       run: |
-       eval `ssh-agent -s`
+       ssh-agent -s
        mkdir -p /home/runner/.ssh/
        touch /home/runner/.ssh/id_ed25519
        echo -e "${{secrets.SSH_KEY}}" > /home/runner/.ssh/id_ed25519
@@ -62,6 +62,7 @@ jobs:
        ssh-keyscan -t rsa,dsa,ecdsa,ed25519 ${{secrets.STAGING_HOST}} >> /home/runner/.ssh/known_hosts
     - name: Run ansible script
       run: |
-        service ssh status
+        systemctl disable ssh.socket
+        systemctl start ssh.service
         ansible-playbook -vvv --private-key /home/runner/.ssh/id_rsa --user=${{secrets.ANSIBLE_USER}} -i ${{secrets.STAGING_HOST}}, infra/deploy-playbook.yaml
    
