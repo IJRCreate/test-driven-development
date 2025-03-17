@@ -10,14 +10,13 @@ env:
   MOZ_HEADLESS: "1"
 
 jobs:
-  build:
 
+  testing:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
       matrix:
         python-version: [3.13]
-
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -44,5 +43,25 @@ jobs:
       with:
         name: screendumps
         path: src/functional_tests/screendumps/
-
-        
+  
+  test-staging:
+    needs: testing
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.13]
+    steps: 
+    - name: Setup SSH 
+      run: |
+       ssh-agent -s
+       mkdir -p /home/runner/.ssh/
+       touch /home/runner/.ssh/id_ed25519
+       echo -e "${{secrets.SSH_KEY}}" > /home/runner/.ssh/id_ed25519
+       chmod 700 /home/runner/.ssh/id_rsa
+       ssh-keyscan -t rsa,dsa,ecdsa,ed25519 ${{secrets.STAGING_HOST}} >> /home/runner/.ssh/known_hosts
+    - name: Run ansible script
+      run: |
+        service ssh status
+        ansible-playbook -vvv --private-key /home/runner/.ssh/id_rsa --user=${{secrets.ANSIBLE_USER}} -i ${{secrets.STAGING_HOST}}, infra/deploy-playbook.yaml
+   

@@ -13,6 +13,7 @@ MAX_WAIT = 5
 
 SCREEN_DUMP_LOCATION = Path(__file__).absolute().parent / "screendumps"
 
+
 class FunctionalTest(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -34,9 +35,9 @@ class FunctionalTest(StaticLiveServerTestCase):
         return self._outcome.result.failures or self._outcome.result.errors
 
     def take_screenshot(self):
-            path = SCREEN_DUMP_LOCATION / self._get_filename("png")
-            print("screenshotting to", path)
-            self.browser.get_screenshot_as_file(str(path))
+        path = SCREEN_DUMP_LOCATION / self._get_filename("png")
+        print("screenshotting to", path)
+        self.browser.get_screenshot_as_file(str(path))
 
     def dump_html(self):
         path = SCREEN_DUMP_LOCATION / self._get_filename("html")
@@ -44,10 +45,10 @@ class FunctionalTest(StaticLiveServerTestCase):
         path.write_text(self.browser.page_source)
 
     def _get_filename(self, extension):
-            timestamp = datetime.now().isoformat().replace(":", ".")[:19]
-            return (
-                f"{self.__class__.__name__}.{self._testMethodName}-{timestamp}.{extension}"
-            )
+        timestamp = datetime.now().isoformat().replace(":", ".")[:19]
+        return (
+            f"{self.__class__.__name__}.{self._testMethodName}-{timestamp}.{extension}"
+        )
 
     def wait_for(self, fn):
         start_time = time.time()
