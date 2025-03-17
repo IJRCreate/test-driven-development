@@ -52,6 +52,7 @@ jobs:
       matrix:
         python-version: [3.13]
     steps: 
+    - uses: actions/checkout@v4
     - name: Setup SSH 
       run: |
        ssh-agent -s
