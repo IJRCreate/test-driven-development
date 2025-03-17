@@ -64,5 +64,5 @@ jobs:
        sudo systemctl start ssh.service
     - name: Run ansible script
       run: |
-        ansible-playbook -vvv --private-key /home/runner/.ssh/id_rsa --user=${{secrets.ANSIBLE_USER}} -i ${{secrets.STAGING_HOST}}, infra/deploy-playbook.yaml
+        ansible-playbook -vvv --private-key /home/runner/.ssh/id_ed25519 --user=${{secrets.ANSIBLE_USER}} -i ${{secrets.STAGING_HOST}}, infra/deploy-playbook.yaml
    
