@@ -165,3 +165,6 @@ src/static
 
 # Testing
 src/functional_tests/screendumps
+
+# Misc
+.vscode/
